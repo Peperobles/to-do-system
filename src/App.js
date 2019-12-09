@@ -8,38 +8,55 @@ class App extends Component {
     todos: [
       {
         id: 1,
-        title: 'Take out the trash',
+        title: "Take out the trash",
         completed: false
       },
       {
         id: 2,
-        title: 'Dentist appointment',
+        title: "Dentist appointment",
         completed: true
       },
       {
         id: 3,
-        title: 'Dinner with friends',
+        title: "Dinner with friends",
         completed: false
-      },
-    ]  
+      }
+    ]
   };
 
-  markComplete = (id) => {
-    this.setState({ todos: this.state.todos.map(todo => {
-      if(todo.id === id){
-        todo.completed = !todo.completed
-      }
-      return todo;
-    }) })
-  }
+  // Toggle Complete
+  markComplete = id => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      })
+    });
+  };
 
+  // Delete Todo
+  deleteTodo = id => {
+    this.setState({
+      todos: [...this.state.todos.filter(todo => todo.id !== id)]
+    });
+  };
 
   render() {
-    return(
+    return (
       <div className="App">
-        <Todos todos={this.state.todos} markComplete={this.markComplete}/>
+        <div className="container">
+          <div className="row">
+          <Todos
+            todos={this.state.todos}
+            markComplete={this.markComplete}
+            deleteTodo={this.deleteTodo}
+          />
+          </div>
+        </div>
       </div>
-    )
+    );
   }
 }
 
