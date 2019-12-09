@@ -8,24 +8,19 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: "Take out the trash",
-        completed: false
-      },
-      {
-        id: 2,
-        title: "Dentist appointment",
-        completed: true
-      },
-      {
-        id: 3,
-        title: "Dinner with friends",
-        completed: false
-      }
-    ]
-  };
+    todos: []
+  }
+
+  componentDidMount(){
+    localStorage.getItem('Todos') && this.setState({
+      todos: JSON.parse(localStorage.getItem('Todos'))
+    });
+  }
+
+  // Save data to localStorage
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('Todos', JSON.stringify(nextState.todos));
+  }
 
   // Toggle Complete
   markComplete = id => {
