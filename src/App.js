@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Header from './components/layout/Header'
 import Todos from "./components/Todos";
+import AddTodo from "./components/AddTodo";
+import uuid from 'uuid';
 
 import "./App.css";
 
@@ -8,7 +10,7 @@ class App extends Component {
   state = {
     todos: [
       {
-        id: 1,
+        id: uuid.v4(),
         title: "Take out the trash",
         completed: false
       },
@@ -44,11 +46,22 @@ class App extends Component {
     });
   };
 
+  //AddTodo
+  addTodo = (title) => {
+    const newTodo = {
+      id: uuid.v4(),    // Random id from uuid package
+      title: title,
+      completed: false  // Always false when added
+    }
+    this.setState({ todos: [...this.state.todos, newTodo] });
+  }
+
   render() {
     return (
       <div className="App">
         <Header/>
         <div className="container">
+          <AddTodo addTodo={this.addTodo}/>
           <div className="row">
           <Todos
             todos={this.state.todos}
