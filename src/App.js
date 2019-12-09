@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   // Save data to localStorage
-  UNSAFE_componentWillUpdate(nextProps, nextState) {
+  UNSAFE_componentWillUpdate(nextProps, nextState) {      // Waiting for new update to change this lifecycledmethod
     localStorage.setItem('Todos', JSON.stringify(nextState.todos));
   }
 
